@@ -1,9 +1,14 @@
 <script setup>
+import { ref } from 'vue'
 const usuario = localStorage.getItem('usuario')
 function desconectar() {
   localStorage.setItem("usuario", null);
   location.reload();
 }
+
+let sala = ref('')
+let random = ref('')
+
 
 </script>
 <template>
@@ -13,7 +18,7 @@ function desconectar() {
             </div>
             <div id="form_content_wrapper">
                 <form id="join-form">
-                    <input type="text" class="mt-3" name="room_name" required />
+                    <input type="text" class="mt-3" v-model="sala" name="room_name" required />
                     <input type="submit" class="mt-4" value="Unirse a sala" />
                 </form>
                 <form id="join-random-form" class="mt-3">
@@ -57,8 +62,9 @@ input{
     border-radius: 5px;
     padding: 16px 20px;
     font-size:15px;
-    background-color: grey;
+    background-color: white;
     margin-top: 32px;
+    cursor: pointer;
 }
 
 input[type='submit']{
@@ -68,6 +74,7 @@ input[type='submit']{
 .otro{
     text-align: center;
     background-color: violet;
+    cursor: pointer;
 }
 span{
     color: white;

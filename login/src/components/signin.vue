@@ -4,94 +4,40 @@ import servicioLogin from "../servicios/login/servicioLogin.js";
 const usuarioInput = ref(null);
 const usuario = ref(null);
 usuario.value = localStorage.getItem("usuario");
-import Swal from 'sweetalert2';
-
-
 
 const iniciarSesion = () => {
-  console.log("hola");
   if (usuarioInput.value != null) {
     servicioLogin
       .findByNombreContrasenia(usuarioInput.value)
       .then((response) => {
         console.log(response.data);
         if (response.data == "") {
-          Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Usuario incorrecto',
-          }).then(function(){
-          location.reload();
-          })
+          console.log("ho");
+          alert("Usuario Incorrecto");
           localStorage.setItem("usuario", null);
+          location.reload();
         } else {
-          
           console.log(response.data.id);
           localStorage.setItem("id", response.data.id);
-          Swal.fire({
-              icon: 'success',
-              title: `Hola ${usuarioInput.value}`,
-              text: 'Usuario correcto',
-          }).then(function(){
-          location.reload();
-          })
+          alert("Usuario Correcto");
           localStorage.setItem("usuario", usuarioInput.value);
+          location.reload();
         }
       })
       .catch((e) => {
         localStorage.setItem("usuario", null);
-        Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: `Error del servidor -> ${e}`,
-          }).then(function(){
-          location.reload();
-          })
+        alert("usuario incorrecto, problemas de conexion");
+        console.log(e);
+        //location.reload();
       });
   }
 };
 
 </script>
 
-<template>
-  <!--
-      <section class="vh-100">
-        <div class="container py-5">
-            <div class="row d-flex align-items-center justify-content-center h-100">
-                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                    <form @submit.prevent="iniciarSesion">
-                        
-                        <div class="form-outline mb-4">
-                            <input type="text" id="formLoginLabelEmail" class="form-control form-control-lg"
-                                v-model="usuarioInput" required autofocus />
-                            <label class="form-label" for="formLoginLabelEmail">Email</label>
-                        </div>
-
-                        
-                        <div class="form-outline mb-4">
-                            <input type="password" id="formLoginLabelSenha" class="form-control form-control-lg"
-                                v-model="contraseniaInput"  />
-                            <label class="form-label" for="formLoginLabelSenha">Contraseña</label>
-                        </div>
-
-                        <div class="d-flex justify-content-around align-items-center mb-4">
-                            
-                            <router-link to="/registrar">Registrarse</router-link>
-                        </div>
-
-                        
-                        <button type="submit" class="col-12 btn btn-primary btn-lg btn-block">Entrar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-  -->
-<div class="container">
-  <div class="row">
+<template> 
     <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
               <form @submit.prevent="iniciarSesion">
-                
                 <div class="form-floating mb-3">
                   <input
                     type="text"
@@ -100,6 +46,7 @@ const iniciarSesion = () => {
                     placeholder="name@example.com"
                     v-model="usuarioInput"
                   />
+                  <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
                   <input
@@ -111,10 +58,19 @@ const iniciarSesion = () => {
                     placeholder="Password"
                     v-model="contraseniaInput"
                   />
+                  <label for="floatingPassword">Password</label>
                 </div>
 
                 <div class="form-check mb-3">
-                  
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="rememberPasswordCheck"
+                  />
+                  <label class="form-check-label" for="rememberPasswordCheck">
+                    Remember password
+                  </label>
                 </div>
                 <div class="d-grid">
                   <button
@@ -124,27 +80,52 @@ const iniciarSesion = () => {
                     Sign in
                   </button>
                 </div>
-                
+                <hr class="my-4" />
+                <div class="d-grid mb-2">
+                  <button
+                    class="btn btn-google btn-light text-uppercase fw-bold"
+                    type="submit"
+                  >
+                    <i class="fab fa-google me-2"></i> Sign in with Google
+                  </button>
+                </div>
               </form>
-  </div>
-
-</div>
-    
 </template>
 
 
 <style scoped>
+
+.contenedor-imagen {
+  display: flex;
+  justify-content: center;
+}
+
+.contenedor-imagen img {
+  margin: 0 auto;
+  max-width: 80%;
+  max-height: 500px;
+}
 *{
     margin: 0;
     box-sizing: border-box;
 }
 
-.btn{
-  width: 100%;
+
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
 }
 
-body{
-    background-color: lightblue;
+.btn-google {
+  color: white ;
+  background-color: #ea4335;
+}
+
+.btn-facebook {
+  color: white !important;
+  background-color: #3b5998;
 }
 
 .titulo{
