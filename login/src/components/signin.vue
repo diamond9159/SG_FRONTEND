@@ -4,7 +4,7 @@ import servicioLogin from "../servicios/login/servicioLogin.js";
 const usuarioInput = ref(null);
 const usuario = ref(null);
 usuario.value = localStorage.getItem("usuario");
-import Swal from "sweetalert2";
+import Swal from "sweetalert2/dist/sweetalert2.all.js";
 
 const iniciarSesion = () => {
   console.log("hola");
