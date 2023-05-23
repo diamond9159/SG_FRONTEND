@@ -1,8 +1,12 @@
 <template>
 
 	<div class="container">
-	  <h1>Tic tac toe</h1>
-	  <div class="play-area">
+	  
+	  <div class="row">
+		<div class="col-3"></div>
+		<div>
+			<h1>Tic tac toe</h1>
+		<div class="play-area bajar">
 		<div id="block_0" class="block" @click="draw(0, false)">{{ content[0] }}</div>
 		<div id="block_1" class="block" @click="draw(1, false)">{{ content[1] }}</div>
 		<div id="block_2" class="block" @click="draw(2, false)">{{ content[2] }}</div>
@@ -12,19 +16,34 @@
 		<div id="block_6" class="block" @click="draw(6, false)">{{ content[6] }}</div>
 		<div id="block_7" class="block" @click="draw(7, false)">{{ content[7] }}</div>
 		<div id="block_8" class="block" @click="draw(8, false)">{{ content[8] }}</div>
+		</div>
 	  </div>
 	  <h2 id="winner" v-if="isOver"> Winner is {{winner}} </h2>
 	  <h2 v-if="isTie"> Game is Tie</h2>
 	  <button @click="resetBoard()" v-if="isOver || isTie">RESET BOARD</button>
-  
+	  </div>
 	</div>
   </template>
   
   <script>
   import io from 'socket.io-client'
   const socket = io("http://localhost:3000")
-  let roomId = localStorage.getItem("room")
-  console.log(roomId);
+  let queryString = window.location.search;
+  let roomId
+let urlParams = new URLSearchParams(queryString);
+
+if(localStorage.getItem("room")===null){
+        roomId = String(Math.floor(Math.random() * 10000));
+        urlParams.append("room", `${roomId}`)
+        localStorage.setItem("room", `${roomId}`);
+        console.log(localStorage.getItem("room"));
+    }else{
+        roomId = localStorage.getItem("room")
+        urlParams.append("room", `${roomId}`)
+        console.log("El id es "+roomId);
+        localStorage.removeItem("room")
+    }
+
   export default {
 	name: 'App',
 	components: {
@@ -97,18 +116,18 @@
 		console.log("received index", index)
 		this.draw(index, true)
 	  })
+	  socket.emit("join", roomId)
 	},
 	onMounted() {
-		socket.emit('create or join', roomId);
-		socket.on('full', function(room) {
-			console.log('Room' + room + " is full.");
-			window.location = 'lobby.html'
-		});
+		
 	}
-  }
+    }
   </script>
   
   <style>
+  .bajar{
+	margin-top: 100px;  
+	}
 	* {
 	  margin: 0;
 	  padding: 0;

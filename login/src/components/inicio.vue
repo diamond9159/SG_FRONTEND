@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { RouterLink,useRouter,useRoute } from 'vue-router';
 const usuario = localStorage.getItem('usuario')
 function desconectar() {
   localStorage.setItem("usuario", null);
@@ -7,8 +8,12 @@ function desconectar() {
 }
 
 let sala = ref('')
-let random = ref('')
 
+let userR = useRouter()
+function entrar() {
+    localStorage.setItem("room",sala.value)
+    userR.push("/juego")
+}
 
 </script>
 <template>
@@ -17,12 +22,12 @@ let random = ref('')
                 <p>Crear o unirse a una sala de Juego</p>
             </div>
             <div id="form_content_wrapper">
-                <form id="join-form">
+                <form id="join-form" @submit.prevent="entrar">
                     <input type="text" class="mt-3" v-model="sala" name="room_name" required />
                     <input type="submit" class="mt-4" value="Unirse a sala" />
                 </form>
                 <form id="join-random-form" class="mt-3">
-                    <RouterLink to="/juego" >
+                    <RouterLink to="/juegoRandom" >
                         <input type="submit" value="Unirse a sala random" />
                     </RouterLink>
                 </form>

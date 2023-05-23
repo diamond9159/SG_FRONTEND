@@ -15,7 +15,7 @@ const iniciarSesion = () => {
         console.log(response.data);
         if (response.data == "") {
           Swal.fire({
-            icon: "success",
+            icon: "error",
             title: "Oops...",
             text: "Usuario incorrecto",
           }).then(function () {

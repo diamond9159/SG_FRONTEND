@@ -2,7 +2,10 @@
 import inicio from './inicio.vue';
 import historial from './historial.vue'
 import juego from './juego.vue';
+import juegoRandom from './juegoRandom.vue';
 const historia = localStorage.getItem('historial')
+const random = localStorage.getItem('random')
+
 </script>
 <template>
     <div class="container" v-show="usuario !== 'null'">
@@ -19,7 +22,12 @@ const historia = localStorage.getItem('historial')
                         <historial></historial>
                     </div>
                     <div v-else>
+                      <div v-if="random">
+                        <juegoRandom></juegoRandom>
+                      </div>
+                      <div v-else>
                         <juego></juego>
+                      </div>
                     </div>
                         
                     <div class="circles22"></div>

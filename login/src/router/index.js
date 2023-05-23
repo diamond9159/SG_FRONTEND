@@ -3,6 +3,7 @@ import paginaInicio from "@/paginas/paginaInicio.vue";
 import paginaListar from "@/paginas/paginaListar.vue";
 import paginaHistorial from "@/paginas/paginaHistorial.vue";
 import paginaJuego from "@/paginas/paginaJuego.vue"
+import paginaJuegoRandom from "@/paginas/paginaJuegoRandom.vue"
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,6 +43,19 @@ const router = createRouter({
             path: '/juego',
             name: 'juego',
             component: paginaJuego,
+            beforeEnter: (to, from, next) => {
+                let usuario = localStorage.getItem('usuario')                
+                if (usuario!=='null') {
+                    next()
+                } else {
+                    next('/')
+                }
+            }
+        },
+        {
+            path: '/juegoRandom',
+            name: 'juegoRandom',
+            component: paginaJuegoRandom,
             beforeEnter: (to, from, next) => {
                 let usuario = localStorage.getItem('usuario')                
                 if (usuario!=='null') {

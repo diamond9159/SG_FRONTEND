@@ -2,6 +2,7 @@
 import libroAbierto from '../components/libroAbierto.vue';
 import barraMenu from '../components/menu.vue'
 localStorage.setItem('historial',true)
+localStorage.setItem(`random`,false)
 </script>
 
 <template>
