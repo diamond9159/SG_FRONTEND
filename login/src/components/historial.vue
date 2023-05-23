@@ -1,18 +1,12 @@
 <script setup>
 import servicioHistorial from '../servicios/historial/servicioHistorial'
 import { ref  } from "vue";
-let partidas = ref('')
-let resultado = ref('')
+let array;
 servicioHistorial
-      .getAll()
+      .historial(localStorage.getItem("id"))
       .then((response) => {
-        let array = response.data
-        array.forEach(element => {
-            if(element.usuario.username !== localStorage.getItem('usuario')){
-                partidas.value=element.usuario.username
-                resultado.value=element.puntos
-        }
-        });
+        array = response.data
+        console.log(response.data)
       }
       )
 </script>
@@ -30,9 +24,9 @@ servicioHistorial
                 </tr>
             </thead>
           <tbody>
-            <tr>
-              <td>{{ partidas }}</td>
-              <td>{{ resultado }}</td>
+            <tr v-for="contricante in array">
+              <td>{{ contricante.usuario.username }}</td>
+              <td>{{ contricante.resultado }}</td>
             </tr>
           </tbody>
         </table>
