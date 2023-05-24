@@ -1,18 +1,22 @@
 <script setup>
 import { ref, computed, reactive } from "vue";
+import bcrypt from 'bcryptjs';
 import servicioLogin from "../servicios/login/servicioLogin.js";
-const usuarioInput = ref(null);
+const usuarioInput = ref('');
+const contraseniaInput = ref('');
 const usuario = ref(null);
 usuario.value = localStorage.getItem("usuario");
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
 
 const iniciarSesion = () => {
   console.log("hola");
-  if (usuarioInput.value != null) {
+  if (usuarioInput.value != '' && contraseniaInput.value != '') {
+    let salt = bcrypt.genSaltSync(10);
+    let password = bcrypt.hashSync(contraseniaInput.value, salt);
     servicioLogin
-      .findByNombreContrasenia(usuarioInput.value)
+      .login(usuarioInput.value, password)
       .then((response) => {
-        console.log(response.data);
+        console.log(response.status);
         if (response.data == "") {
           Swal.fire({
             icon: "error",

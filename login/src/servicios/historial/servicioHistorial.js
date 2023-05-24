@@ -1,6 +1,6 @@
 import http from "./http-axios";
 
-class servicioProducto {
+class servicioUsuarioPartida {
   getAll() {
     return http.get("/api/squaregame/usuariopartida");
   }
@@ -10,4 +10,4 @@ class servicioProducto {
   }
 }
 
-export default new servicioProducto();
+export default new servicioUsuarioPartida();
