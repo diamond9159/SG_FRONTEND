@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, reactive } from "vue";
+import { RouterLink,useRouter,useRoute } from 'vue-router';
 import bcrypt from 'bcryptjs';
 import servicioLogin from "../servicios/login/servicioLogin.js";
 const usuarioInput = ref('');
@@ -9,7 +10,6 @@ usuario.value = localStorage.getItem("usuario");
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
 
 const iniciarSesion = () => {
-  console.log("hola");
   if (usuarioInput.value != '' && contraseniaInput.value != '') {
     let salt = bcrypt.genSaltSync(10);
     let password = bcrypt.hashSync(contraseniaInput.value, salt);
@@ -119,6 +119,9 @@ const iniciarSesion = () => {
           </button>
         </div>
       </form>
+      <RouterLink to="/crear" >
+          <a>Registro usuario</a>
+      </RouterLink>
     </div>
   </div>
 </template>

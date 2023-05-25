@@ -2,8 +2,9 @@
 import { ref, computed, reactive } from "vue";
 import signin from "../components/signin.vue";
 import inicio from "../components/inicio.vue"
+import registro from "../components/registro.vue"
 const usuario = localStorage.getItem('usuario')
-
+const crear = localStorage.getItem("crear")
 </script>
 
 <template>
@@ -19,7 +20,12 @@ const usuario = localStorage.getItem('usuario')
           <div class="tapa">
             <div class="card-body p-4 p-sm-5 contenido">
               <div v-show="usuario == 'null'">
-                <signin></signin>
+                <div v-if="crear=='true'">
+                <registro></registro>
+                </div>
+                <div v-else>
+                  <signin></signin>
+                </div>
               </div>
              <div v-show="usuario !== 'null'">
               <inicio></inicio>

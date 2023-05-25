@@ -2,7 +2,7 @@
 import libro from "../components/libro.vue";
 localStorage.setItem('historial',false)
 localStorage.setItem(`random`,false)
-localStorage.setItem(`crear`,false)
+localStorage.setItem("crear",true)
 </script>
 <template>
     <main>

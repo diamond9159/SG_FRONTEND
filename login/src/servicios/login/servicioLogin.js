@@ -8,6 +8,10 @@ class servicioLogin {
   login(username, password) {
     return http.post("/api/squaregame/usuarios/login/", { username, password });
   }
+
+  create(data){
+    return http.post("/api/squaregame/usuarios/create", { data });
+  }
  }
 
 export default new servicioLogin();

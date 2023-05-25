@@ -3,6 +3,7 @@ import paginaInicio from "@/paginas/paginaInicio.vue";
 import paginaHistorial from "@/paginas/paginaHistorial.vue";
 import paginaJuego from "@/paginas/paginaJuego.vue"
 import paginaJuegoRandom from "@/paginas/paginaJuegoRandom.vue"
+import paginaCrear from "@/paginas/paginaCrear.vue"
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,10 @@ const router = createRouter({
                     next('/')
                 }
             }
+        },{
+            path: '/crear',
+            name: 'crear',
+            component: paginaCrear,
         },
         {
             path: '/juegoRandom',
