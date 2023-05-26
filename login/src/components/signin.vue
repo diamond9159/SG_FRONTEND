@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed, reactive } from "vue";
-import { RouterLink,useRouter,useRoute } from 'vue-router';
+import { ref } from "vue";
+import { RouterLink } from 'vue-router';
 import bcrypt from 'bcryptjs';
 import servicioLogin from "../servicios/login/servicioLogin.js";
 const usuarioInput = ref('');
@@ -44,26 +44,6 @@ const iniciarSesion = () => {
         })
       }
     })
-        /* localStorage.setItem("id", respuesta.data.id)
-        localStorage.setItem("usuario", respuesta.data.username)
-        Swal.fire({
-            icon: "success",
-            title: `Hola ${usuarioInput.value}`,
-            text: "Usuario correcto",
-          }).then(function () {
-            location.reload();
-          });
-      }
-      else{
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Usuario incorrecto",
-          }).then(function () {
-            location.reload();
-          });
-      }
-    }) */
     .catch((e) => {
       localStorage.setItem("usuario", null);
       Swal.fire({
@@ -79,39 +59,6 @@ const iniciarSesion = () => {
 </script>
 
 <template>
-  <!--
-      <section class="vh-100">
-        <div class="container py-5">
-            <div class="row d-flex align-items-center justify-content-center h-100">
-                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                    <form @submit.prevent="iniciarSesion">
-                        
-                        <div class="form-outline mb-4">
-                            <input type="text" id="formLoginLabelEmail" class="form-control form-control-lg"
-                                v-model="usuarioInput" required autofocus />
-                            <label class="form-label" for="formLoginLabelEmail">Email</label>
-                        </div>
-
-                        
-                        <div class="form-outline mb-4">
-                            <input type="password" id="formLoginLabelSenha" class="form-control form-control-lg"
-                                v-model="contraseniaInput"  />
-                            <label class="form-label" for="formLoginLabelSenha">Contraseña</label>
-                        </div>
-
-                        <div class="d-flex justify-content-around align-items-center mb-4">
-                            
-                            <router-link to="/registrar">Registrarse</router-link>
-                        </div>
-
-                        
-                        <button type="submit" class="col-12 btn btn-primary btn-lg btn-block">Entrar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-  -->
   <div class="container">
     <div class="row">
       <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
