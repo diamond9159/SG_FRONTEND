@@ -11,44 +11,69 @@ import Swal from "sweetalert2/dist/sweetalert2.all.js";
 
 const iniciarSesion = () => {
   if (usuarioInput.value != '' && contraseniaInput.value != '') {
-    let salt = bcrypt.genSaltSync(10);
-    let password = bcrypt.hashSync(contraseniaInput.value, salt);
-    servicioLogin
-      .login(usuarioInput.value, password)
-      .then((response) => {
-        console.log(response.status);
-        if (response.data == "") {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Usuario incorrecto",
-          }).then(function () {
-            location.reload();
+    servicioLogin.findByUsuario(usuarioInput.value)
+    .then((respuesta) => {
+      console.log(respuesta.data)
+      console.log(bcrypt.compare(contraseniaInput.value, respuesta.data.password));
+      if(usuarioInput.value == respuesta.data.username){
+        bcrypt.compare(contraseniaInput.value, respuesta.data.password)
+        .then((response) => {
+          if(response){
+            localStorage.setItem("id", respuesta.data.id)
+            localStorage.setItem("usuario", respuesta.data.username)
+            Swal.fire({
+              icon: "success",
+              title: `Hola ${usuarioInput.value}`,
+              text: "Usuario correcto",
+            }).then(function () {
+              location.reload();
           });
-          localStorage.setItem("usuario", null);
-        } else {
-          console.log(response.data.id);
-          localStorage.setItem("id", response.data.id);
-          Swal.fire({
+          }
+          else{
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Usuario incorrecto",
+              }).then(function () {
+                location.reload();
+              });
+          }
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+      }
+    })
+        /* localStorage.setItem("id", respuesta.data.id)
+        localStorage.setItem("usuario", respuesta.data.username)
+        Swal.fire({
             icon: "success",
             title: `Hola ${usuarioInput.value}`,
             text: "Usuario correcto",
           }).then(function () {
             location.reload();
           });
-          localStorage.setItem("usuario", usuarioInput.value);
-        }
-      })
-      .catch((e) => {
-        localStorage.setItem("usuario", null);
+      }
+      else{
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: `Error del servidor -> ${e}`,
-        }).then(function () {
-          location.reload();
-        });
+            icon: "error",
+            title: "Oops...",
+            text: "Usuario incorrecto",
+          }).then(function () {
+            location.reload();
+          });
+      }
+    }) */
+    .catch((e) => {
+      localStorage.setItem("usuario", null);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `Error del servidor -> ${e}`,
+      }).then(function () {
+        location.reload();
       });
+    });
   }
 };
 </script>

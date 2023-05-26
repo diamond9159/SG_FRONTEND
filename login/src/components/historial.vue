@@ -1,14 +1,22 @@
 <script setup>
 import servicioHistorial from '../servicios/historial/servicioHistorial'
 import { ref  } from "vue";
-let array;
-servicioHistorial
+import { onMounted } from 'vue';
+let array = ref(null);
+
+
+function historial(){ 
+  servicioHistorial
       .historial(localStorage.getItem("id"))
       .then((response) => {
-        array = response.data
+        array.value = response.data
         console.log(response.data)
       }
       )
+}
+onMounted(() => {
+  historial();
+});
 </script>
 <template>
   <div class="container">
