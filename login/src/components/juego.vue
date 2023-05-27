@@ -92,6 +92,20 @@
 		}
 	  }
 	},
+	crearPartida(){
+		let fecha = new Date()
+	},
+	generarFechaActual(){
+		var fechaActual = new Date();
+		var anio = fechaActual.getFullYear();
+		var mes = ("0" + (fechaActual.getMonth() + 1)).slice(-2);
+		var dia = ("0" + fechaActual.getDate()).slice(-2);
+		var hora = ("0" + fechaActual.getHours()).slice(-2);
+		var minutos = ("0" + fechaActual.getMinutes()).slice(-2);
+		var segundos = ("0" + fechaActual.getSeconds()).slice(-2);
+		var fechaFormateada = anio + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":" + segundos + ".000000";
+		console.log(fechaFormateada);
+	},
 	created() {
 	  socket.on("play", (index) => {
 		console.log("received index", index)
@@ -102,10 +116,12 @@
 		socket.emit('create or join', roomId);
 		socket.on('full', function(room) {
 			console.log('Room' + room + " is full.");
+			console.log(fechaFormateada);
 			window.location = 'lobby.html'
 		});
 	}
   }
+  generarFechaActual();
   </script>
   
   <style>
