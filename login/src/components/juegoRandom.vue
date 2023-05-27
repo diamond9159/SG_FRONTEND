@@ -118,9 +118,20 @@ if(localStorage.getItem("room")===null){
 	  })
 	  socket.emit("join", roomId)
 	},
+	generarFechaActual(){
+		var fechaActual = new Date();
+		var anio = fechaActual.getFullYear();
+		var mes = ("0" + (fechaActual.getMonth() + 1)).slice(-2);
+		var dia = ("0" + fechaActual.getDate()).slice(-2);
+		var hora = ("0" + fechaActual.getHours()).slice(-2);
+		var minutos = ("0" + fechaActual.getMinutes()).slice(-2);
+		var segundos = ("0" + fechaActual.getSeconds()).slice(-2);
+		var fechaFormateada = anio + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":" + segundos + ".000000";
+		console.log(fechaFormateada);
+	},
 	onMounted() {
-		
-	}
+		generarFechaActual()
+		}
     }
   </script>
   
