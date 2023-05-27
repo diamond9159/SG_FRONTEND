@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-3"></div>
 			<div>
-				<h1>Tic tac toe</h1>
+				<h1>Tic tac toe Ran</h1>
 				<div class="play-area bajar">
 					<div id="block_0" class="block" @click="draw(0, false)">{{ content[0] }}</div>
 					<div id="block_1" class="block" @click="draw(1, false)">{{ content[1] }}</div>

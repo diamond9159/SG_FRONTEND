@@ -5,9 +5,11 @@ import { onMounted } from 'vue';
 let queryString = window.location.search;
 let urlParams = new URLSearchParams(queryString);
 let roomId
-onMounted(() => {
-  localStorage.setItem('historial',false)
+localStorage.setItem('historial',false)
   localStorage.setItem("random",true)
+  console.log(localStorage.getItem("random"));
+onMounted(() => {
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
   console.log(typeof(localStorage.getItem("room")));
   console.log(typeof("null"));
   console.log(localStorage.getItem("room")==="null");
