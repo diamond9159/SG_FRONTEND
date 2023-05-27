@@ -4,8 +4,8 @@ import { onMounted } from 'vue';
 
 onMounted(() => {
     localStorage.setItem('historial',false)
-    localStorage.setItem(random,false)
-    localStorage.setItem(crear,false)
+    localStorage.setItem("random",false)
+    localStorage.setItem("crear",false)
     localStorage.setItem("room","null")
 })
 </script>

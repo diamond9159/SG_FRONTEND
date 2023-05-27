@@ -7,7 +7,7 @@ let urlParams = new URLSearchParams(queryString);
 let roomId
 onMounted(() => {
   localStorage.setItem('historial',false)
-  localStorage.setItem(random,true)
+  localStorage.setItem("random",true)
   console.log(typeof(localStorage.getItem("room")));
   console.log(typeof("null"));
   console.log(localStorage.getItem("room")==="null");

@@ -15,7 +15,7 @@
 	  </div>
 	  <h2 id="winner" v-if="isOver"> Winner is {{winner}} </h2>
 	  <h2 v-if="isTie"> Game is Tie</h2>
-	  <button @click="resetBoard()" v-if="isOver || isTie">RESET BOARD</button>
+	  <button @click="resetBoard();generarFechaActual();hola()" v-if="isOver || isTie">RESET BOARD</button>
   
 	</div>
   </template>
@@ -23,8 +23,8 @@
   <script>
   import io from 'socket.io-client'
   const socket = io("http://localhost:3000")
-  let roomId = localStorage.getItem("room")
-  console.log(roomId);
+import { onMounted } from 'vue'
+let ganador
   export default {
 	name: 'App',
 	components: {
@@ -72,6 +72,7 @@
 		  this.content[firstIndex] != "") {
 			this.isOver = true;
 			this.winner = this.content[firstIndex];
+			ganador = this.winner
 		  }
 		}
 	  },
@@ -90,12 +91,8 @@
 		  this.winner = null
 		  this.isTie = false
 		}
-	  }
-	},
-	crearPartida(){
-		let fecha = new Date()
-	},
-	generarFechaActual(){
+	  },
+	  generarFechaActual(){
 		var fechaActual = new Date();
 		var anio = fechaActual.getFullYear();
 		var mes = ("0" + (fechaActual.getMonth() + 1)).slice(-2);
@@ -105,6 +102,15 @@
 		var segundos = ("0" + fechaActual.getSeconds()).slice(-2);
 		var fechaFormateada = anio + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":" + segundos + ".000000";
 		console.log(fechaFormateada);
+		console.log(ganador);
+	},
+	hola(){
+		console.log(this.winner);
+		console.log("holaa");
+	},
+	},
+	crearPartida(){
+		let fecha = new Date()
 	},
 	created() {
 	  socket.on("play", (index) => {
@@ -113,15 +119,15 @@
 	  })
 	},
 	onMounted() {
+		let roomId = localStorage.getItem("room")
+  		console.log(roomId);
 		socket.emit('create or join', roomId);
 		socket.on('full', function(room) {
 			console.log('Room' + room + " is full.");
-			console.log(fechaFormateada);
-			window.location = 'lobby.html'
 		});
 	}
   }
-  generarFechaActual();
+  
   </script>
   
   <style>
