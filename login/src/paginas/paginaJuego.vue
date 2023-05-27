@@ -1,7 +1,10 @@
 <script setup>
 import libroAbierto from "../components/libroAbierto.vue";
-localStorage.setItem('historial',false)
-localStorage.setItem("random",false)
+import { onMounted } from "vue";
+onMounted(() => {
+  localStorage.setItem('historial',false)
+  localStorage.setItem("random",false)
+})
 </script>
 <template>
     <main>

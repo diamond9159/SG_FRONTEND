@@ -1,8 +1,13 @@
 <script setup>
 import libro from "../components/libro.vue";
-localStorage.setItem('historial',false)
-localStorage.setItem(`random`,false)
-localStorage.setItem(`crear`,false)
+import { onMounted } from 'vue';
+
+onMounted(() => {
+    localStorage.setItem('historial',false)
+    localStorage.setItem(random,false)
+    localStorage.setItem(crear,false)
+    localStorage.setItem("room","null")
+})
 </script>
 <template>
     <main>

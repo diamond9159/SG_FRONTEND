@@ -28,21 +28,8 @@
   <script>
   import io from 'socket.io-client'
   const socket = io("http://localhost:3000")
-  let queryString = window.location.search;
-  let roomId
-let urlParams = new URLSearchParams(queryString);
+  let roomId = localStorage.getItem("room")
 
-if(localStorage.getItem("room")===null){
-        roomId = String(Math.floor(Math.random() * 10000));
-        urlParams.append("room", `${roomId}`)
-        localStorage.setItem("room", `${roomId}`);
-        console.log(localStorage.getItem("room"));
-    }else{
-        roomId = localStorage.getItem("room")
-        urlParams.append("room", `${roomId}`)
-        console.log("El id es "+roomId);
-        localStorage.removeItem("room")
-    }
 
   export default {
 	name: 'App',
@@ -133,6 +120,7 @@ if(localStorage.getItem("room")===null){
 		generarFechaActual()
 		}
     }
+	generarFechaActual()
   </script>
   
   <style>
