@@ -6,8 +6,6 @@ import juegoRandom from './juegoRandom.vue';
 const historia = localStorage.getItem('historial')
 const random = localStorage.getItem('random')
 const usuario = localStorage.getItem("usuario")
-console.log(historia=='true');
-console.log(random=='true');
 </script>
 <template>
     <div class="container" v-show="usuario !== 'null'">

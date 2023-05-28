@@ -5,10 +5,15 @@ const io = require('socket.io')(server, {
     }
 });
 io.on('connection', (socket)=> {
-    socket.emit("hello", "youtube tutorial");
     socket.on("play", index => {
         console.log("server received", index)
         socket.broadcast.emit("play", index)
+    })
+    socket.on("terminada",boolean=>{
+        if(boolean){
+            socket.broadcast.emit("ganador",false)
+        }
+        
     })
     socket.on('create or join', function(room, clientName) {
         

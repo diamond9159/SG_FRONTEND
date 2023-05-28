@@ -4,7 +4,6 @@ import { onMounted } from 'vue';
 localStorage.setItem('historial',true)
   localStorage.setItem("random",false)
 onMounted(() => {
-  console.log("NNNNNNNNNNNNNNNNNNNNNNN");
   
 });
 </script>

@@ -29,7 +29,6 @@ const crearUser = () => {
                 usuarioEmail.value = ""
                 usuarioContrasenia.value = ""
             } else {
-                console.log(response.data.id);
                 Swal.fire({
                     icon: "success",
                     title: `Hola ${usuarioInput.value}`,

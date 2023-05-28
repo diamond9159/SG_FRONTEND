@@ -13,8 +13,6 @@ const iniciarSesion = () => {
   if (usuarioInput.value != '' && contraseniaInput.value != '') {
     servicioLogin.findByUsuario(usuarioInput.value)
     .then((respuesta) => {
-      console.log(respuesta.data)
-      console.log(bcrypt.compare(contraseniaInput.value, respuesta.data.password));
       if(usuarioInput.value == respuesta.data.username){
         bcrypt.compare(contraseniaInput.value, respuesta.data.password)
         .then((response) => {

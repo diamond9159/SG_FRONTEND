@@ -7,23 +7,14 @@ let urlParams = new URLSearchParams(queryString);
 let roomId
 localStorage.setItem('historial',false)
   localStorage.setItem("random",true)
-  console.log(localStorage.getItem("random"));
 onMounted(() => {
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-  console.log(typeof(localStorage.getItem("room")));
-  console.log(typeof("null"));
-  console.log(localStorage.getItem("room")==="null");
   if(localStorage.getItem("room")==="null"){
-    console.log("es nulo");
         roomId = String(Math.floor(Math.random() * 10000));
         urlParams.append("room", `${roomId}`)
         localStorage.setItem("room", `${roomId}`);
-        console.log(localStorage.getItem("room"));
     }else{
-      console.log("no es nulo");
         roomId = localStorage.getItem("room")
         urlParams.append("room", `${roomId}`)
-        console.log("El id es "+roomId);
         localStorage.removeItem("room")
     }
 })

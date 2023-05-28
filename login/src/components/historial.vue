@@ -10,7 +10,6 @@ function historial(){
       .historial(localStorage.getItem("id"))
       .then((response) => {
         array.value = response.data
-        console.log(response.data)
       }
       )
 }

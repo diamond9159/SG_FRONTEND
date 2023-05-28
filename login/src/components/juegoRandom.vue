@@ -29,6 +29,7 @@ import io from 'socket.io-client'
 const socket = io("http://localhost:3000")
 let roomId = localStorage.getItem("room")
 let ganador
+let terminada
 
 export default {
 	name: 'App',
@@ -58,6 +59,7 @@ export default {
 			this.turn = !this.turn;
 			this.calculateWinner();
 			this.calculateTie();
+			this.ganadores()
 		},
 		calculateWinner() {
 			const WIN_CONDITIONS = [
@@ -76,6 +78,7 @@ export default {
 					this.content[firstIndex] == this.content[thirdIndex] &&
 					this.content[firstIndex] != "") {
 					this.isOver = true;
+					terminada = this.isOver
 					this.winner = this.content[firstIndex];
 					ganador=this.winner
 				}
@@ -107,18 +110,32 @@ export default {
 			var fechaFormateada = anio + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":" + segundos + ".000000";
 			console.log(fechaFormateada);
 		},
+		ganadores(){
+			if(terminada){
+				socket.emit("terminada",true)
+			}else{
+				console.log("jjjjjj");
+			}
+		}
 	},
 	created() {
 		socket.on("play", (index) => {
-			console.log("received index", index)
 			this.draw(index, true)
 		})
 		socket.emit("join", roomId)
+		socket.on("ganador",(boolean)=>{
+			if(boolean){
+				console.log("Has ganado con so");
+			}else{
+				console.log("Has perdido con so");
+			}
+
+		})
 	},
 
 	
 }
-console.log(ganador);
+
 </script>
   
 <style>
